@@ -1,0 +1,1 @@
+echo "$(./a.sh | grep 'e' | sed -n '1p')" > b.txt
