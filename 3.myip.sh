@@ -3,10 +3,11 @@
 #Show the ip address and change it and/or the subnet mask
 #Usage: 3.myip.sh [-ip] [ip_address] [-mask] [subnet_mask]
 
-#！/bin/sh
+#!/bin/sh
 #column -t ipstatus
 
-num="$(./ifconfig | grep '^e..[0-9]' | sed -n '1p' | sed 's/://g'| awk '{print $1}')"
+#取出网卡名
+num="$(./ifconfig | grep '^[e,w]..[0-9]' | sed -n '1p' | sed 's/://g'| awk '{print $1}')"
 if [[ "$#" -eq 0 ]]; then
     touch ipstatus
     echo "NIC   IP_Address" > ipstatus
