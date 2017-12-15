@@ -7,16 +7,16 @@
 #column -t ipstatus
 
 #取出网卡名
-num="$(./ifconfig | grep '^[e,w]..[0-9]' | sed -n '1p' | sed 's/://g'| awk '{print $1}')"
+num="$(sudo ifconfig | grep '^[e,w]..[0-9]' | sed -n '1p' | sed 's/://g'| awk '{print $1}')"
 if [[ "$#" -eq 0 ]]; then
     touch ipstatus
     echo "NIC   IP_Address" > ipstatus
     echo -e "$num\c" >> ipstatus
     echo -e "  \c" >> ipstatus
-    echo "$(./ifconfig $num | grep 'netmask' | sed -n '1p' | awk '{print $2}')" >> ipstatus
+    echo "$(sudo ifconfig $num | grep 'inet' | sed -n '1p' | sed 's/'Bcast:'//g' | awk '{print $3}')" >> ipstatus
     column -t ipstatus
 elif [[ $1 = "-ip" && $3 = "-mask" ]]; then
-    eval "ifconfig $num $2 netmask $4"
+    eval "sudo ifconfig $num $2 netmask $4"
 else
     echo -e "Usage: 3.myip.sh [-ip] [ip_address] [-mask] [subnet_mask]\nShow the ip address and change it and/or the subnet mask"
 fi

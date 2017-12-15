@@ -21,9 +21,10 @@ else
             echo "$(du -sh * | sort -rh | head -n $2 | nl)"
         fi
     elif [[ "$1" = "-d" ]];then
-        echo "The largest files/directories in ""$4"" are:" 
+        cd "$2"
+        echo "The largest files/directories in ""$2"" are:" 
         echo "$(du -sh * | sort -rh | nl)"
     else
         echo -e "Usage: 4.file_size.sh [-n N] [-d Dir]\nShow top N largest files/directorys in Dir"
-    fi
+    fi  
 fi
