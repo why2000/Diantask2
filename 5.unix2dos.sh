@@ -19,13 +19,11 @@ else
     case $0 in 
 	    *5.dos2unix.sh)
             echo "dos2unix.sh"
-            sed -i 's/%13//g' $1
-            cat -v "$1"
+            sed -i 's/\r//g' $1
         ;;
         *5.unix2dos.sh)
             echo "unix2dos.sh"
             sed -i 's/$/\r/g' $1
-            cat -v "$1"
         ;;
         *)
             echo -e "Usage: command [FileName]\nCommand should be 5.dos2unix.sh or 5.unix2dos.sh"
